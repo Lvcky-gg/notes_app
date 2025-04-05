@@ -5,7 +5,7 @@ node_modules/
 dist/
 build/
 .vscode/
-/__pycache__/
+__pycache__/
 *.pyc
 .venv/
 pipfile.lock
