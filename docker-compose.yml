@@ -1,0 +1,41 @@
+version: '3.8'
+# 8080 for frontend
+# 8000 for backend
+# 8001 for analysis-service
+# 5432 for db
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"  
+    restart: always  
+
+  analysis-service:
+    build:
+      context: ./analysis-service
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+
+
+  backend-service:
+    build:
+      context: ./backend-service
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://admin:admin@db:5432/notesdb
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: notesdb
+    ports:
+      - "5432:5432"
