@@ -7,5 +7,5 @@ build/
 .vscode/
 /__pycache__/
 *.pyc
-/.venv/
+.venv/
 pipfile.lock
