@@ -3,16 +3,19 @@
   <input v-model="content" placeholder="Content" />
   <button @click="createNote">Create Note</button>
   <p v-for="note in noteStore.notes" :key="note.id">
-    <div>
+    <!-- <div> -->
     {{ note.title }} - {{ note.content }} - {{ note.id }}
-  </div>
+    <!-- </div> -->
 
-  <input v-model="note.title" placeholder="note.title"/>
-  <input v-model="note.content" placeholder="note.content" />
-  <button @click="updateNote(note.id, {title:note.title,content:note.content})">Update</button>
-  <button @click="deleteNote(note.id)">Delete</button>
+    <input v-model="note.title" placeholder="note.title" />
+    <input v-model="note.content" placeholder="note.content" />
+    <button
+      @click="updateNote(note.id, { title: note.title, content: note.content })"
+    >
+      Update
+    </button>
+    <button @click="deleteNote(note.id)">Delete</button>
   </p>
-
 </template>
 <script setup lang="ts">
 import { useNoteStore } from '../stores/noteStore'
@@ -39,11 +42,10 @@ const createNote = () => {
 const deleteNote = (id: number) => {
   noteStore.deleteNote(id)
 }
-const updateNote = (id : number, note: any) => {
+const updateNote = (id: number, note: any) => {
   noteStore.updateNote(id, {
     title: note.title,
-    content: note.content,
+    content: note.content
   })
 }
-
 </script>
